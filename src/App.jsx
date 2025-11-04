@@ -1,28 +1,28 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import Sidebar from './components/Sidebar.jsx';
+import Topbar from './components/Topbar.jsx';
+import HeroSection from './components/HeroSection.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
+    <div className="h-screen w-screen overflow-hidden bg-gradient-to-b from-[#090D12] to-[#0B0F14]">
+      {/* Layout container */}
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-export default App
+      <main className="lg:pl-72 h-full flex flex-col">
+        <Topbar onMenuClick={() => setSidebarOpen(true)} />
+
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6">
+          <HeroSection />
+
+          <div className="mt-8">
+            <Dashboard />
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
